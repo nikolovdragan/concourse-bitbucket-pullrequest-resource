@@ -30,6 +30,12 @@ payload=$(tmpfile request)
 
 cat > "$payload" <&0
 
+enable_debug=$(jq -r '.source.debug // false' < ${payload})
+if [ "${enable_debug}" = "true" ]; then
+  echo "Enable debug mode"
+  set -x
+fi
+
 load_pubkey "$payload"
 configure_credentials "$payload"
 
@@ -148,7 +154,6 @@ prq=$(bitbucket_pullrequest "$repo_host" "$repo_project" "$repo_name" "$prq_id" 
 if [ "$prq" != "ERROR" ]; then
   branch=$(echo "$prq" | jq -r '.fromRef.displayId')
 fi
-
 
 # expose configuration of pull request that can be used in container
 git config --add pullrequest.id $prq_id

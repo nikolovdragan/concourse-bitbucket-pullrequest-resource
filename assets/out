@@ -30,6 +30,12 @@ payload=$(tmpfile request)
 
 cat > "$payload" <&0
 
+enable_debug=$(jq -r '.source.debug // false' < ${payload})
+if [ "${enable_debug}" = "true" ]; then
+  echo "Enable debug mode"
+  set -x
+fi
+
 load_pubkey "$payload"
 configure_credentials "$payload"
 
