@@ -97,11 +97,6 @@ log "Cloning $uri in $destination"
 git clone $depthflag "$uri" "$destination"
 cd "$destination"
 
-# TODO cleanup
-#branch="pull-requests/${prq_id}/merge"
-#git fetch $depthflag origin "+refs/${branch}:refs/remotes/origin/${branch}"
-#git checkout -B $branch origin/$branch
-
 git fetch $depthflag origin "${prq_from_branch}"
 git checkout -B "${prq_from_branch}" "origin/${prq_from_branch}"
 
@@ -148,15 +143,6 @@ fi
 if [ "$disable_git_lfs" != "true" ]; then
   git submodule foreach "git lfs fetch && git lfs checkout"
 fi
-
-# calculate source and target commit
-# TODO cleanup
-#source_commit=$(git rev-list --parents -1 $ref | awk '{print $3}')
-#echo "Using source commit: ${source_commit}"
-
-# TODO cleanup
-#target_commit=$(git rev-list --parents -1 $ref | awk '{print $2}')
-#echo "Using target commit: ${target_commit}"
 
 if [ -z "$prq_from" ]; then
   log "Unable to determine source commit from merge commit $ref. Please verify depth configuration."
