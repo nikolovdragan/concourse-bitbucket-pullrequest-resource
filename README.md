@@ -18,7 +18,7 @@ resource_types:
 - name: concourse-bitbucket-pullrequest
   type: docker-image
   source:
-    repository: nikolovdragab/concourse-bitbucket-pullrequest-resource
+    repository: nikolovdragan/concourse-bitbucket-pullrequest-resource
 ```
 
 See [concourse docs](http://concourse.ci/configuring-resource-types.html) for more details on adding `resource_types` to a pipeline config.
