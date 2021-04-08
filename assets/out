@@ -96,7 +96,8 @@ if [ -z "$prq_number" ]; then
   exit 1
 fi
 
-prq_hash=$(echo "$ls_remote" | grep -E "/pull\-requests/${prq_number}/from" | awk '{print $1}')
+# prq_hash=$(echo "$ls_remote" | grep -E "/pull\-requests/${prq_number}/from" | awk '{print $1}')
+prq_hash=$(git config --get pullrequest.source)
 
 if [ -z "$prq_hash" ]; then
   log "Failed to determine pull request hash from id $prq_number in \n$ls_remote"
