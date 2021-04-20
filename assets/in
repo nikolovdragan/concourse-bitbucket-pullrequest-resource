@@ -166,6 +166,7 @@ git config --add pullrequest.merge $ref
 git config --add pullrequest.date "$prq_date"
 git config --add pullrequest.change "$prq_change"
 git config --add pullrequest.branch "$from_branch"
+git config --add pullrequest.destination "$prq_target_branch"
 
 jq -n \
   --argjson version "$(jq '.version' < "$payload")" \
